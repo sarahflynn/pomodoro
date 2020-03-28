@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const { execSync } = require('child_process');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-// NOTE: An AMI is only built once (for production).
+const isProd = process.env.NODE_ENV === 'production';
+
 const BUILD_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'production';
 const BUNDLE_PATH = path.join(__dirname, `./dist/${BUILD_ENV}`);
 const RELEASE = execSync('git rev-parse HEAD')
@@ -23,6 +24,8 @@ const finalPlugins = [
 ];
 
 module.exports = {
+  mode: isProd ? 'production' : 'development',
+  
   entry: ['@babel/polyfill', './src/index.js'],
 
   output: {
