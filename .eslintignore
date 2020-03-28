@@ -1,0 +1,17 @@
+.vscode/
+*.code-workspace
+*.html
+chromedriver.log
+codequality/
+dist/
+docker-compose.yml
+Dockerfile
+Jenkinsfile
+local/
+node_modules/
+package-lock.json
+pipelines/
+Readme.md
+reports/
+tsconfig.json
+yarn-error.log
