@@ -1,6 +1,6 @@
 import { Reducer, Dispatch } from 'redux';
 import produce from 'immer';
-import { Action, SimpleAction } from '../types/redux-types';
+import { Action, SimpleAction, Payload } from '../types/redux-types';
 
 export enum ActionTypes {
   SET_TIME_REMAINING = 'pomodoro/timer/SET_TIME_REMAINING',
@@ -12,13 +12,13 @@ export type Actions =
   | Action<ActionTypes.SET_TIME_REMAINING, { sec: number }>;
 
 export interface StateShape {
-  timeRemaining: Time;
+  timeRemaining: number;
   timerRunning: boolean;
 }
 
 export const initialState: StateShape = {
   timeRemaining: 1500,
-  timerRunning: false,
+  timerRunning: true,
 };
 
 const reducer: Reducer<StateShape, Actions> = (
@@ -29,12 +29,12 @@ const reducer: Reducer<StateShape, Actions> = (
     switch (action.type) {
       // starts and stops the timer
       case ActionTypes.START_STOP:
-        draft.timerRunning = !initialState.timerRunning;
+        draft.timerRunning = !draft.timerRunning;
         break;
 
       // adjusts time remaining by adding # of sec (+ or -) to current time remaining
       case ActionTypes.SET_TIME_REMAINING:
-        draft.timeRemaining = initialState.timeRemaining + action.payload.sec;
+        draft.timeRemaining = draft.timeRemaining + action.payload.sec;
         break;
 
       // no default

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 
-import timer from './timer';
+import session from './session';
 
-export default combineReducers({ timer });
+export default combineReducers({ session });

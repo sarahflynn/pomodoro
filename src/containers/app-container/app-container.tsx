@@ -4,7 +4,7 @@ import Routes from '../../routes';
 
 const ViewWrapper = styled('div')(`
   padding: 16px 32px;
-`)
+`);
 
 export class AppContainer extends React.Component {
   render(): React.ReactElement {
