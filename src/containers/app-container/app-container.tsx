@@ -1,5 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import { Header } from '../../components'
+
 import Routes from '../../routes';
 
 const ViewWrapper = styled('div')(`
@@ -11,7 +13,7 @@ export class AppContainer extends React.Component {
     console.log('in app container');
     return (
       <>
-        <h1>Pomodoro</h1>
+        <Header />
         <ViewWrapper>
           <Routes />
         </ViewWrapper>

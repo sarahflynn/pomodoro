@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Timer } from '../../components';
+import { Timer, Button } from '../../components';
 import * as SActions from '../../state/session';
 
 interface SessionContainerReduxProps {
@@ -30,7 +30,7 @@ export class SessionContainer extends React.Component<
     setTimeRemaining(-1);
   }
 
-  async handleTimerClick(): Promise<void> {
+  handleTimerClick = async (): Promise<void> => {
     const { startStop } = this.props;
 
     await startStop();
@@ -56,8 +56,9 @@ export class SessionContainer extends React.Component<
 
     return (
       <>
-        <h1>Session</h1>
-        <Timer timeRemaining={timeRemaining} onClick={this.handleTimerClick} />
+        <h3>Session</h3>
+        <Timer timeRemaining={timeRemaining} />
+        <Button color='primary' onClick={this.handleTimerClick}>Start/Stop</Button>
       </>
     );
   }
@@ -67,9 +68,9 @@ const mapStore = (state: { [key: string]: any }): SessionContainerProps => ({
   ...state.session,
 });
 
-const mapDispatch = {
+const mapToDispatch = {
   setTimeRemaining: SActions.setTimeRemaining,
   startStop: SActions.startStop,
 }
 
-export default connect(mapStore, mapDispatch)(SessionContainer);
+export default connect(mapStore, mapToDispatch)(SessionContainer);

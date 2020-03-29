@@ -1,4 +1,3 @@
-const compression = require('compression');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -20,6 +19,7 @@ class Pomodoro {
   }
 
   initRoutes() {
+    this.app.use('/pomodoro/static/', express.static(this.staticPath));
     this.app.get('/pomodoro*', (req, res) => {
       res.sendFile(path.resolve(this.staticPath, 'index.html'));
     });
@@ -43,8 +43,6 @@ class Pomodoro {
 
     // eslint-disable-next-line no-console
     this.app.listen(LOCAL_PORT, () => console.log(`✅ app initialized at http://localhost:${LOCAL_PORT}/pomodoro`));
-
-    this.app.use(compression());
   }
 }
 

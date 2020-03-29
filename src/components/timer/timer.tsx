@@ -2,15 +2,14 @@ import * as React from 'react';
 
 interface TimerProps {
   timeRemaining: number;
-  onClick: () => Promise<void>;
 }
 export class Timer extends React.Component<TimerProps, {}> {
   render(): React.ReactElement {
-    const { timeRemaining, onClick } = this.props;
+    const { timeRemaining, } = this.props;
 
     return (
       <>
-        <p onClick={onClick}>{timeRemaining}</p>
+        <p>{timeRemaining}</p>
       </>
     );
   }

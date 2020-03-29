@@ -18,7 +18,7 @@ export interface StateShape {
 
 export const initialState: StateShape = {
   timeRemaining: 1500,
-  timerRunning: true,
+  timerRunning: false,
 };
 
 const reducer: Reducer<StateShape, Actions> = (
