@@ -1,7 +1,23 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Timer, Button } from '../../components';
+import styled from 'react-emotion';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { Button } from '../../components';
 import * as SActions from '../../state/session';
+
+const ProgressCircleContainer = styled('div')(`
+  width: 400px;
+  height: 400px;
+
+  .CircularProgressbar-path {
+    stroke: #4791db;
+  }
+
+  .CircularProgressbar-text {
+    fill: #dc004e;
+  }
+`);
 
 interface SessionContainerReduxProps {
   setTimeRemaining: typeof SActions.setTimeRemaining;
@@ -49,6 +65,19 @@ export class SessionContainer extends React.Component<
     }
   }
 
+  getHMS = (sec: number) => {
+    const ms = [Math.floor(sec/60).toString(), Math.floor(sec%60).toString()];
+    
+    const mmss = ms.map(val => {
+      if (val.length < 2) {
+        return (`0${val}`)
+      }
+      return val;
+    });
+
+    return `${mmss[0]} : ${mmss[1]}`;
+  }
+
   render(): React.ReactElement {
     const { timeRemaining } = this.props;
 
@@ -56,8 +85,9 @@ export class SessionContainer extends React.Component<
 
     return (
       <>
-        <h3>Session</h3>
-        <Timer timeRemaining={timeRemaining} />
+        <ProgressCircleContainer onClick={this.handleTimerClick}>
+          <CircularProgressbar value={timeRemaining} maxValue={1500} text={this.getHMS(timeRemaining)} />
+        </ProgressCircleContainer>
         <Button color='primary' onClick={this.handleTimerClick}>Start/Stop</Button>
       </>
     );
