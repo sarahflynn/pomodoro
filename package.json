@@ -1,13 +1,13 @@
 {
-  "name": "pomodoro",
+  "name": "voting-poker",
   "version": "0.0.1",
-  "description": "A pomodoro timer with robust features for planning and tracking tasks",
+  "description": "A voting poker app for agile ticket grooming",
   "author": "Sarah Flynn <sflynn.pdx@gmail.com>",
   "license": "MIT",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sarahflynn/pomodoro.git"
+    "url": "https://github.com/sarahflynn/voting-poker.git"
   },
   "scripts": {
     "build:local": "rm -rf dist/ && NODE_ENV=local node_modules/.bin/webpack",

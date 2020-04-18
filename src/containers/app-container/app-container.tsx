@@ -10,7 +10,6 @@ const ViewWrapper = styled('div')(`
 
 export class AppContainer extends React.Component {
   render(): React.ReactElement {
-    console.log('in app container');
     return (
       <>
         <Header />

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const LOCAL_PORT = 9876;
 
-class Pomodoro {
+class VotingPoker {
   constructor() {
     this.app = express();
     this.staticPath = null;
@@ -19,8 +19,8 @@ class Pomodoro {
   }
 
   initRoutes() {
-    this.app.use('/pomodoro/static/', express.static(this.staticPath));
-    this.app.get('/pomodoro*', (req, res) => {
+    this.app.use('/voting-poker/static/', express.static(this.staticPath));
+    this.app.get('/voting-poker*', (req, res) => {
       res.sendFile(path.resolve(this.staticPath, 'index.html'));
     });
   }
@@ -42,8 +42,8 @@ class Pomodoro {
     );
 
     // eslint-disable-next-line no-console
-    this.app.listen(LOCAL_PORT, () => console.log(`✅ app initialized at http://localhost:${LOCAL_PORT}/pomodoro`));
+    this.app.listen(LOCAL_PORT, () => console.log(`✅ app initialized at http://localhost:${LOCAL_PORT}/voting-poker`));
   }
 }
 
-module.exports = new Pomodoro();
+module.exports = new VotingPoker();
