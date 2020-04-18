@@ -4,8 +4,8 @@ import { SessionContainer } from './containers';
 
 const routes = (): React.ReactElement => (
   <Switch>
-    <Route path='/pomodoro/session' component={SessionContainer} />
-    <Redirect exact path='/pomodoro' to='/pomodoro/session' />
+    <Route path='/pomodoro' component={SessionContainer} />
+    <Redirect exact path='/' to='/pomodoro' />
   </Switch>
 );
 
