@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { default as MuiButton } from '@material-ui/core/Button';
+import styled from 'react-emotion';
 
 interface ButtonProps {
   variant?:
@@ -17,6 +18,12 @@ interface ButtonProps {
   children: string;
 }
 
+const ButtonContainer = styled('div')(`
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+`);
+
 const Button: React.FunctionComponent<ButtonProps> = ({
   variant = 'contained',
   color,
@@ -26,11 +33,11 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   children,
 }): React.ReactElement => {
   return (
-    <div>
+    <ButtonContainer>
       <MuiButton variant={variant} color={color} disabled={disabled} href={href} onClick={onClick}>
         {children}
       </MuiButton>
-    </div>
+    </ButtonContainer>
   );
 };
 

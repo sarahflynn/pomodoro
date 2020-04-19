@@ -19,6 +19,12 @@ const ProgressCircleContainer = styled('div')(`
   }
 `);
 
+const StyledContainer = styled('div')(`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`);
+
 interface SessionContainerReduxProps {
   setTimeRemaining: typeof SActions.setTimeRemaining;
   startStop: typeof SActions.startStop;
@@ -35,23 +41,22 @@ export class SessionContainer extends React.Component<
   SessionContainerProps,
   SessionContainerState
 > {
-
   state = {
     interval: null,
-  }
+  };
 
   subtractOneSecond = (): void => {
     const { setTimeRemaining } = this.props;
 
     setTimeRemaining(-1);
-  }
+  };
 
   handleTimerClick = async (): Promise<void> => {
     const { startStop } = this.props;
 
     await startStop();
     this.startStopTimer();
-  }
+  };
 
   startStopTimer = (): void => {
     const { timerRunning } = this.props;
@@ -59,24 +64,27 @@ export class SessionContainer extends React.Component<
 
     if (timerRunning) {
       const interval = setInterval(this.subtractOneSecond, 1000);
-      this.setState({ interval })
+      this.setState({ interval });
     } else {
       clearInterval(interval);
     }
-  }
+  };
 
   getHMS = (sec: number) => {
-    const ms = [Math.floor(sec/60).toString(), Math.floor(sec%60).toString()];
-    
-    const mmss = ms.map(val => {
+    const ms = [
+      Math.floor(sec / 60).toString(),
+      Math.floor(sec % 60).toString(),
+    ];
+
+    const mmss = ms.map((val) => {
       if (val.length < 2) {
-        return (`0${val}`)
+        return `0${val}`;
       }
       return val;
     });
 
     return `${mmss[0]} : ${mmss[1]}`;
-  }
+  };
 
   render(): React.ReactElement {
     const { timeRemaining } = this.props;
@@ -85,10 +93,18 @@ export class SessionContainer extends React.Component<
 
     return (
       <>
-        <ProgressCircleContainer onClick={this.handleTimerClick}>
-          <CircularProgressbar value={timeRemaining} maxValue={1500} text={this.getHMS(timeRemaining)} />
-        </ProgressCircleContainer>
-        <Button color='primary' onClick={this.handleTimerClick}>Start/Stop</Button>
+        <StyledContainer>
+          <ProgressCircleContainer onClick={this.handleTimerClick}>
+            <CircularProgressbar
+              value={timeRemaining}
+              maxValue={1500}
+              text={this.getHMS(timeRemaining)}
+            />
+          </ProgressCircleContainer>
+          <Button color="primary" onClick={this.handleTimerClick}>
+            Start/Stop
+          </Button>
+        </StyledContainer>
       </>
     );
   }
@@ -101,6 +117,6 @@ const mapStore = (state: { [key: string]: any }): SessionContainerProps => ({
 const mapToDispatch = {
   setTimeRemaining: SActions.setTimeRemaining,
   startStop: SActions.startStop,
-}
+};
 
 export default connect(mapStore, mapToDispatch)(SessionContainer);

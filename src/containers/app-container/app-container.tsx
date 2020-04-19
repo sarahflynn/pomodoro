@@ -5,12 +5,13 @@ import { Header } from '../../components'
 import Routes from '../../routes';
 
 const ViewWrapper = styled('div')(`
-  padding: 16px 32px;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
 `);
 
 export class AppContainer extends React.Component {
   render(): React.ReactElement {
-    console.log('in app container');
     return (
       <>
         <Header />
